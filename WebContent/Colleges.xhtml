@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>College page</title>
+	
+	<f:metadata>
+		<f:event listener="#{collegeController.loadCollege()}" type="preRenderView" />
+	</f:metadata>
+	
+	<style>
+		table {
+    			font-family: arial, sans-serif;
+    			border-collapse: collapse;
+    			width: 100%;
+		}	
+		td, th{
+    			border: 1px solid #dddddd;
+    			text-align: left;
+    			padding: 8px;
+		}
+		tr:nth-child(even){
+    			background-color: #dddddd;
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<h:form>
+	
+		<h:messages globalOnly="true" />
+		<br/>	
+		<h:commandButton value="Add College" action="AddCollege" />
+		<br />
+		<br />
+		<h:dataTable var="m" value="#{collegeController.colleges}">
+			
+			<h:column>
+				<f:facet name="header">College ID</f:facet>
+				#{c.collegeId}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">College Name</f:facet>
+				#{c.collegeName}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">College Address</f:facet>
+				#{c.collegeAddress}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="Update" action="#{collegerController.loadUpdateDetails(c)}"/>
+				<br/>
+				<h:commandLink value="Delete" action="#{collegeController.deleteManufacturer(m)}" onclick="return confirm('Do you want to delete?')"></h:commandLink>
+			</h:column>
+			
+		</h:dataTable>
+		<br/> 
+		<br/>
+		<h:outputLink value="default.xhtml">Home</h:outputLink>
+	</h:form>
+</h:body>
+</html>
